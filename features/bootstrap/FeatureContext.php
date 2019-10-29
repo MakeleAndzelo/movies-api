@@ -1,25 +1,50 @@
 <?php
 
+use App\Entity\Movie;
 use Behat\Behat\Context\Context;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\KernelInterface;
+use Behatch\Context\RestContext;
+use Behatch\HttpCall\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\ORM\Tools\ToolsException;
 
-/**
- * This context class contains the definitions of the steps used by the demo
- * feature file. Learn how to get started with Behat and BDD on Behat's website.
- *
- * @see http://behat.org/en/latest/quick_start.html
- */
-class FeatureContext implements Context
+class FeatureContext extends RestContext implements Context
 {
     /**
-     * @var KernelInterface
+     * @var EntityManagerInterface
      */
-    private $kernel;
+    private $entityManager;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(Request $request, EntityManagerInterface $entityManager)
     {
-        $this->kernel = $kernel;
+        parent::__construct($request);
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @Given There is a movie with a title :title
+     *
+     * @param string $title
+     * @throws Exception
+     */
+    public function thereIsAMovieWithATitle(string $title): void
+    {
+        $movie = new Movie($title, 'Testing description', 'Testing director');
+        $this->entityManager->persist($movie);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @BeforeScenario @createSchema
+     *
+     * @throws ToolsException
+     */
+    public function createSchema(): void
+    {
+        $classes = $this->entityManager->getMetadataFactory()->getAllMetadata();
+
+        $schemaTool = new SchemaTool($this->entityManager);
+        $schemaTool->dropSchema($classes);
+        $schemaTool->createSchema($classes);
     }
 }
