@@ -11,3 +11,14 @@ Feature: Getting information about movies
     And I send a "GET" request to "/api/movies"
     Then the response status code should be 200
     And the response should be in JSON
+    And the JSON nodes should contain:
+    | hydra:totalItems | 2 |
+
+  @createSchema
+  Scenario: Get one movie information
+    And There is a movie with a title "Kill Bill"
+    When I send a request for that movie
+    Then the response status code should be 200
+    And the response should be in JSON
+    And the JSON nodes should contain:
+    | title | Kill Bill |

@@ -15,6 +15,11 @@ class FeatureContext extends RestContext implements Context
      */
     private $entityManager;
 
+    /**
+     * @var Movie
+     */
+    private $movie;
+
     public function __construct(Request $request, EntityManagerInterface $entityManager)
     {
         parent::__construct($request);
@@ -29,9 +34,26 @@ class FeatureContext extends RestContext implements Context
      */
     public function thereIsAMovieWithATitle(string $title): void
     {
-        $movie = new Movie($title, 'Testing description', 'Testing director');
-        $this->entityManager->persist($movie);
+        $this->movie = new Movie($title, 'Testing description', 'Testing director');
+        $this->entityManager->persist($this->movie);
         $this->entityManager->flush();
+    }
+
+
+    /**
+     * @When I send a request for that movie
+     */
+    public function iSendARequestForThatMovie()
+    {
+        $this->request->setHttpHeader('Content-Type', 'application/ld+json');
+        $this->request->setHttpHeader('Accept', 'application/ld+json');
+        return $this->request->send(
+            'GET',
+            $this->locatePath(sprintf('/api/movies/%s', $this->movie->getId())),
+            [],
+            [],
+            null
+        );
     }
 
     /**
