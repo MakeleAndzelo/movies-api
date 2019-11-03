@@ -1,5 +1,6 @@
 ###> app ###
 .idea
+node_modules
 ###< app ###
 
 ###> symfony/framework-bundle ###
