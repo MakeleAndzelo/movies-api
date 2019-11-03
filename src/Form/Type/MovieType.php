@@ -6,9 +6,11 @@ namespace App\Form\Type;
 
 use App\Entity\Movie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class MovieType extends AbstractType
 {
@@ -17,7 +19,23 @@ class MovieType extends AbstractType
         $builder
             ->add('title')
             ->add('director')
-            ->add('description', TextareaType::class);
+            ->add('description', TextareaType::class)
+            ->add('poster', FileType::class, [
+                'label' => 'Poster (image file)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5024k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image file',
+                    ])
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

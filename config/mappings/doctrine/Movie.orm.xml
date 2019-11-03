@@ -10,5 +10,7 @@
         <field name="description" type="text" column="description" nullable="true"/>
 
         <field name="director" type="string" column="director"/>
+
+        <field name="posterFilename" type="string" column="posterFilename" nullable="true"/>
     </entity>
 </doctrine-mapping>

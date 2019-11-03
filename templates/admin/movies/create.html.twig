@@ -2,7 +2,44 @@
 
 {% block body %}
     {{ form_start(form) }}
-
-        <button type="submit" name="submit">Add</button>
+    <div class="md:flex md:items-center mb-6">
+        <div class="w-full">
+            <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="inline-full-name">
+                {{ form_label(form.title)}}
+            </label>
+            {{ form_widget(form.title, {"attr": {"class": "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"}}) }}
+        </div>
+    </div>
+    <div class="md:flex md:items-center mb-6">
+        <div class="w-full">
+            <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="inline-full-name">
+                {{ form_label(form.director)}}
+            </label>
+            {{ form_widget(form.director, {"attr": {"class": "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"}}) }}
+        </div>
+    </div>
+    <div class="md:flex md:items-center mb-6">
+        <div class="w-full">
+            <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="inline-full-name">
+                {{ form_label(form.description)}}
+            </label>
+            {{ form_widget(form.description, {"attr": {"class": "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"}}) }}
+        </div>
+    </div>
+    <div class="md:flex md:items-center mb-6">
+        <div class="w-full">
+            <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="inline-full-name">
+                {{ form_label(form.poster)}}
+            </label>
+            {{ form_widget(form.poster, {"attr": {"class": "bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"}}) }}
+        </div>
+    </div>
+    <div class="md:flex md:items-center">
+        <div class="w-full">
+            <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit" name="submit">
+                Add
+            </button>
+        </div>
+    </div>
     {{ form_end(form) }}
 {% endblock %}

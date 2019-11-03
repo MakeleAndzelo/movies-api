@@ -27,6 +27,11 @@ class Movie
     private $director;
 
     /**
+     * @var null|string
+     */
+    private $posterFilename;
+
+    /**
      * @return int
      */
     public function getId(): ?int
@@ -85,6 +90,24 @@ class Movie
     public function setDirector(string $director): Movie
     {
         $this->director = $director;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPosterFilename(): ?string
+    {
+        return $this->posterFilename;
+    }
+
+    /**
+     * @param string|null $posterFilename
+     * @return Movie
+     */
+    public function setPosterFilename(?string $posterFilename): Movie
+    {
+        $this->posterFilename = $posterFilename;
         return $this;
     }
 }
