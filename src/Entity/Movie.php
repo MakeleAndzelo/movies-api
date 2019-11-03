@@ -7,36 +7,29 @@ namespace App\Entity;
 class Movie
 {
     /**
-     * @var int
+     * @var null|int
      */
     private $id;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $title;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $description;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $director;
-
-    public function __construct(string $title, string $description, string $director)
-    {
-        $this->title = $title;
-        $this->description = $description;
-        $this->director = $director;
-    }
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -44,7 +37,7 @@ class Movie
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -62,7 +55,7 @@ class Movie
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -80,7 +73,7 @@ class Movie
     /**
      * @return string
      */
-    public function getDirector(): string
+    public function getDirector(): ?string
     {
         return $this->director;
     }

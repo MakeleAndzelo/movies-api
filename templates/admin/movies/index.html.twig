@@ -1,0 +1,10 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie.title }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

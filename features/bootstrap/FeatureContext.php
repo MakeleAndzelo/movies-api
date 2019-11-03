@@ -34,7 +34,10 @@ class FeatureContext extends RestContext implements Context
      */
     public function thereIsAMovieWithATitle(string $title): void
     {
-        $this->movie = new Movie($title, 'Testing description', 'Testing director');
+        $this->movie = (new Movie)
+            ->setTitle($title)
+            ->setDescription('Testing description')
+            ->setDirector('Testing director');
         $this->entityManager->persist($this->movie);
         $this->entityManager->flush();
     }
