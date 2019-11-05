@@ -27,5 +27,12 @@ services:
         arguments:
             $targetDirectory: '%posters_directory%'
 
+    movie.search_filter:
+        autowire: false
+        autoconfigure: false
+        parent: 'api_platform.doctrine.orm.search_filter'
+        arguments: [{ title: 'partial' }]
+        tags: ['api_platform.filter']
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -1,1 +1,3 @@
 App\Entity\Movie:
+  attributes:
+    filters: ['movie.search_filter']
