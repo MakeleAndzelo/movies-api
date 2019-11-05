@@ -70,4 +70,43 @@ final class MoviesController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="movies_edit")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param FileUploader $fileUploader
+     * @param Movie $movie
+     * @return Response
+     */
+    public function edit(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        FileUploader $fileUploader,
+        Movie $movie
+    ): Response {
+        $form = $this->createForm(MovieType::class, $movie);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $movie = $form->getData();
+
+            $posterFile = $form['poster']->getData();
+
+            if ($posterFile) {
+                $posterFile = $fileUploader->upload($posterFile);
+                $movie->setPosterFilename($posterFile);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('movies_list');
+        }
+
+        return $this->render('admin/movies/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }

@@ -15,3 +15,11 @@ Feature: An admin can manage movies
     Given There is a movie with a title "Kill bill"
     And I am on "/admin/movies"
     Then I should see "Kill Bill"
+
+  Scenario: Edit a movie
+    Given There is a movie with a title "Kill bill"
+    And I am on "/admin/movies"
+    When I follow "edit"
+    And I fill in "movie[title]" with "Kill Bill 2"
+    And I press "submit"
+    Then I should see "Kill Bill 2"

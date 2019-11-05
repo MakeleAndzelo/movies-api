@@ -25,7 +25,8 @@
                     <td class="py-4 px-6 border-b border-grey-light">{{ movie.title }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">{{ movie.director }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">
-                        <a href="#"
+                        <a href="{{ path('movies_edit', {'id': movie.id}) }}"
+                           id="edit"
                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-600">
                             Edit
                         </a>
