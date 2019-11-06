@@ -24,16 +24,16 @@
                 <tr class="hover:bg-grey-lighter">
                     <td class="py-4 px-6 border-b border-grey-light">{{ movie.title }}</td>
                     <td class="py-4 px-6 border-b border-grey-light">{{ movie.director }}</td>
-                    <td class="py-4 px-6 border-b border-grey-light">
+                    <td class="py-4 px-6 border-b border-grey-light flex flex-row">
                         <a href="{{ path('movies_edit', {'id': movie.id}) }}"
                            id="edit"
                            class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green-400 hover:bg-green-600">
                             Edit
                         </a>
-                        <a href="#"
-                           class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-blue-400 hover:bg-blue-600">
-                            View
-                        </a>
+                        <form action="{{ path('movies_delete', {'id': movie.id}) }}" method="POST" class="ml-5">
+                            <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+                            <button class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-red-400 hover:bg-red-600" id="delete">Delete</button>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

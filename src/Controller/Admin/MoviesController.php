@@ -109,4 +109,24 @@ final class MoviesController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/{id}/delete", methods={"POST"}, name="movies_delete")
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param Movie $movie
+     * @return Response
+     */
+    public function delete(Request $request, EntityManagerInterface $entityManager, Movie $movie): Response
+    {
+        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+            return $this->redirectToRoute('movies_list');
+        }
+
+        $entityManager->remove($movie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('movies_list');
+    }
 }
